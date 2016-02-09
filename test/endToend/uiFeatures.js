@@ -3,7 +3,7 @@ var TodoPage = function() {
     
     this.newTodoInput = element(by.id('new-todo'));
     this.footer = element(by.id('footer'));
-    this.remainingCount = element(by.binding('remainingCount'));
+    this.remainingCount = element(by.id('todo-count'));
   	this.clearCompletedButton = element(by.id('clear-completed'));
   	
     this.get = function() {
@@ -45,4 +45,16 @@ describe('todomvc', function() {
             expect(count).toEqual(1); });
         });
     });
+
+    describe('Remaining todo count', function() {
+        it('upon adding todos remaining count should equal to number of items', function() {
+            todoPage.setNewTodo('test 1');
+            todoPage.newTodoInput.sendKeys(protractor.Key.ENTER);
+            todoPage.setNewTodo('test 2');
+            todoPage.newTodoInput.sendKeys(protractor.Key.ENTER);
+            
+            expect(todoPage.remainingCount.getText()).toEqual('3 items left');
+        });
+    });
+
 });
