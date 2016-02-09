@@ -46,6 +46,10 @@ describe('Controllers ::', function() {
 		it('should have an revertEditing function', function() {
 			expect(todoCtrl.revertEditing).toBeDefined();
 		});
+		
+		it('should have an removeTodo function', function() {
+			expect(todoCtrl.removeTodo).toBeDefined();
+		});
 	});
 
 	describe('adding todos', function() {
@@ -148,5 +152,24 @@ describe('Controllers ::', function() {
 			expect(todoCtrl.todos[0]).toEqual(original);
 		});
 	});
+	
+	describe('removing a todo', function() {
+		beforeEach(function() {
+			todoCtrl.newTodo.title = "to do 1";
+			todoCtrl.addTodo();
+			todoCtrl.newTodo.title = "to do 2";
+			todoCtrl.addTodo();
+		});
+
+		afterEach(function() {
+			todoStorageMock.storage = [];
+		});
+
+		it('removeTodo should remove the item specified by index', function() {
+			var todo = todoStorageMock.storage[1];
+			todoCtrl.removeTodo(todo);
+			expect(todoStorageMock.storage.length).toBe(1);
+		});
+    });
 
 });
