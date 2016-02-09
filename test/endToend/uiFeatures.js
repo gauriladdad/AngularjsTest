@@ -57,12 +57,13 @@ describe('todomvc', function() {
         });
     });
 	 describe('Mark todos as completed/incomplete', function() {
-        it('Mark todos as completed', function() {
-			element.all(by.repeater('todo in TC.todos')).then(function(posts) {
-				var activePost = posts[0].element(by.model('todo.completed'));
+  		
+		it('all todos should be incomplete', function() {
+			element.all(by.repeater('todo in TC.todos')).each(function(todo, index) {
+				var activePost = todo.element(by.model('todo.completed'));
 				expect(activePost.isSelected()).toBeFalsy();
 			});
-        });
+		});
     });
 
 });
