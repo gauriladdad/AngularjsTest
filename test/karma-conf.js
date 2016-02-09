@@ -58,10 +58,6 @@ module.exports = function(config){
       'karma-phantomjs-launcher'
     ],
 
-    // plugin settings
-    ngHtml2JsPreprocessor: {
-      stripPrefix: 'app/'
-    },
      coverageReporter: {
       // type of file to output, use text to output to console
       type : 'text',
