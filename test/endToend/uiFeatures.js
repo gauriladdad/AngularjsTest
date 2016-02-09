@@ -65,6 +65,20 @@ describe('todomvc', function() {
         });
     });
 	
+	describe('verify in place editing', function() {
+		it('edit item through double click', function() {
+			element.all(by.repeater('todo in TC.todos')).then(function(posts) {
+				var label = posts[0].element(by.tagName('label'));
+				browser.actions().doubleClick(label).perform();
+				var input = posts[0].element(by.css('.edit'));
+				input.sendKeys("my new value");
+				input.sendKeys(protractor.Key.ENTER);
+				
+				//add expects and verify text
+				});
+		});
+	});
+	
 	describe('Mark todos as completed/incomplete', function() {
   		
 		it('all todos should be incomplete', function() {
@@ -86,13 +100,15 @@ describe('todomvc', function() {
     });
 	
 	describe('Clear completed button working', function() {
-		it('Clear completed button visible after a complete item', function() {
-			expect(todoPage.clearCompletedButton.isDisplayed()).toBeTruthy();
-		});
-		
-		it('Clear completed button should be hidden after click', function() {
-			todoPage.clearCompletedButton.click();
-			expect(todoPage.clearCompletedButton.isDisplayed()).toBeFalsy();
-		});
-	});
+        it('Clear completed button visible after a complete item', function() {
+            expect(todoPage.clearCompletedButton.isDisplayed()).toBeTruthy();
+        });
+        
+        it('Clear completed button should be hidden after click', function() {
+            todoPage.clearCompletedButton.click();
+            expect(todoPage.clearCompletedButton.isDisplayed()).toBeFalsy();
+        });
+    });
+
+	
 });
