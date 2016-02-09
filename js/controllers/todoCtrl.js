@@ -55,7 +55,6 @@
 			}
 
 			todos.push(TC.newTodo);
-			trace("todos: " + todos);
 			resetTodo();
 		};
 
