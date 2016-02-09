@@ -194,5 +194,35 @@ describe('Controllers ::', function() {
 			expect(todoCtrl.todos.length).toBe(1);
 		});
     });
+	
+	describe('markAll todos', function() {
+		beforeEach(function() {
+			todoCtrl.newTodo = {title : "to do 1"};
+			todoCtrl.addTodo();
+			todoCtrl.newTodo = {title : "to do 2"};
+			todoCtrl.addTodo();
+			todoCtrl.newTodo = {title : "to do 3"};
+			todoCtrl.addTodo();
+		});
 
+		afterEach(function() {
+			todoStorageMock.storage = [];
+		});
+
+		it('markAll should set all todos as completed', function() {
+			todoCtrl.markAll(true);
+			for(var i; i < todoStorageMock.storage.length; i++) {
+			  expect(todoStorageMock.storage[i].completed).toBe(true);
+			}
+		});
+		
+		it('markAll should set all todos as not completed', function() {
+			todoCtrl.markAll(false);
+
+			for(var i; i < todoStorageMock.storage.length; i++) {
+			  expect(todoStorageMock.storage[i].completed).toBe(false);
+			}
+		});
+    });
+	
 });
