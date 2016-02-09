@@ -56,5 +56,13 @@ describe('todomvc', function() {
             expect(todoPage.remainingCount.getText()).toEqual('3 items left');
         });
     });
+	 describe('Mark todos as completed/incomplete', function() {
+        it('Mark todos as completed', function() {
+			element.all(by.repeater('todo in TC.todos')).then(function(posts) {
+				var activePost = posts[0].element(by.model('todo.completed'));
+				expect(activePost.isSelected()).toBeFalsy();
+			});
+        });
+    });
 
 });

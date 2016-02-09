@@ -24,3 +24,8 @@ Run automation tests  all in separate command prompts
 webdriver-manager start
 protractor test/protractor-conf.js
  
+ 
+ 
+	//menus.each(function (item) { 
+		  item.click();
+			});
