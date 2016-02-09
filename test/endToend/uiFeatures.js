@@ -31,6 +31,10 @@ describe('todomvc', function() {
             });
     	});
 
+		it('footer should not be displayed', function() {
+			expect(todoPage.footer.isDisplayed()).toBeFalsy();
+		});
+	
     	it('clear completed button should not be displayed', function() {
     	  	expect(todoPage.clearCompletedButton.isDisplayed()).toBeFalsy();
     	});
@@ -44,6 +48,10 @@ describe('todomvc', function() {
             element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
             expect(count).toEqual(1); });
         });
+		
+		it('footer should be displayed', function() {
+			expect(todoPage.footer.isDisplayed()).toBeTruthy();
+		});
     });
 
     describe('Remaining todo count', function() {
