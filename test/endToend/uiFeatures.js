@@ -56,7 +56,8 @@ describe('todomvc', function() {
             expect(todoPage.remainingCount.getText()).toEqual('3 items left');
         });
     });
-	 describe('Mark todos as completed/incomplete', function() {
+	
+	describe('Mark todos as completed/incomplete', function() {
   		
 		it('all todos should be incomplete', function() {
 			element.all(by.repeater('todo in TC.todos')).each(function(todo, index) {
@@ -70,8 +71,20 @@ describe('todomvc', function() {
                 var activePost = posts[0].element(by.model('todo.completed'));
 				activePost.click();
                 expect(activePost.isSelected()).toBeTruthy();
+				
+				expect(todoPage.remainingCount.getText()).toEqual('2 items left');
             });
 		});
     });
-
+	
+	describe('Clear completed button working', function() {
+		it('Clear completed button visible after a complete item', function() {
+			expect(todoPage.clearCompletedButton.isDisplayed()).toBeTruthy();
+		});
+		
+		it('Clear completed button should be hidden after click', function() {
+			todoPage.clearCompletedButton.click();
+			expect(todoPage.clearCompletedButton.isDisplayed()).toBeFalsy();
+		});
+	});
 });
