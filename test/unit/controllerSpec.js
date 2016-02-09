@@ -42,6 +42,10 @@ describe('Controllers ::', function() {
 		it('should have an doneEditing function', function() {
 			expect(todoCtrl.doneEditing).toBeDefined();
 		});
+		
+		it('should have an revertEditing function', function() {
+			expect(todoCtrl.revertEditing).toBeDefined();
+		});
 	});
 
 	describe('adding todos', function() {
@@ -84,7 +88,6 @@ describe('Controllers ::', function() {
 		});
 	});
 
-
 	describe('doneEditing todos', function() {
 		var todo = { title: "editing this todo", completed: false };
 		beforeEach(function() {
@@ -124,4 +127,26 @@ describe('Controllers ::', function() {
 			expect(todoCtrl.todos[0].title).toBe('check PR');
 		});
 	});	
+	
+	describe('revertEditing todos', function() {
+	
+		var todo = { title: "editing this todo", completed: false };
+		beforeEach(function() {
+			todoCtrl.newTodo.title = "new todo";
+			todoCtrl.addTodo();
+			todoCtrl.editTodo(todo);
+		}); 
+		
+		it('revertEditing should set with editTodo is editedTodo to empty object', function() {
+			todoCtrl.revertEditing(0);
+			expect(todoCtrl.editedTodo).toEqual({});
+		});
+		
+		it('revertEditing should set Todo being edited to originalTodo object', function() {
+			var original = todoCtrl.originalTodo;
+			todoCtrl.revertEditing(0);
+			expect(todoCtrl.todos[0]).toEqual(original);
+		});
+	});
+
 });
