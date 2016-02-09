@@ -20,8 +20,8 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "phantomjs": "~1.9",
     "protractor": "^0.21.0",
-    "todomvc-common": "^1.0.1",
-    "todomvc-app-css": "^1.0.1"
+    "todomvc-app-css": "^1.0.1",
+    "todomvc-common": "^1.0.1"
   },
   "scripts": {
     "update-webdriver": "webdriver-manager update",
