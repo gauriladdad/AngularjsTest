@@ -8,15 +8,9 @@ module.exports = function(config){
       // include relevant Angular files and libs
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      
       // include JS files
       'js/**/*.js',
       'js/app.js',
-    
-      // include html template files
-      // 'app/partials/directives/*.html',
-      // 'app/partials/*.html',
-
       // include unit test specs
       'test/unit/*.js'
     ], 
@@ -26,19 +20,16 @@ module.exports = function(config){
       ],
 
     // karma has its own autoWatch feature but Grunt watch can also do this
-    autoWatch : false,
+    autoWatch : true,
 
     // testing framework, be sure to install the correct karma plugin
     frameworks: ['jasmine'],
 
     // browsers to test against, be sure to install the correct browser launcher plugins
-    browsers : ['Chrome'],
+    browsers : ['Chrome', 'PhantomJS'],
 
     // map of preprocessors that is used mostly for plugins
     preprocessors: {
-      // 'app/partials/directives/*.html': 'html2js',
-      // 'app/partials/*.html': 'html2js'
-      
       // test coverage
       'js/controllers/*.js': ['coverage'],
       'js/directives/*.js': ['coverage'],
@@ -51,7 +42,6 @@ module.exports = function(config){
     plugins : [
       'karma-coverage',
       'karma-chrome-launcher',
-      'karma-firefox-launcher',
       'karma-jasmine',
       'karma-phantomjs-launcher'
     ],
@@ -68,3 +58,4 @@ module.exports = function(config){
       outputFile: 'test-results/junit-results.xml'
     }
 })}
+

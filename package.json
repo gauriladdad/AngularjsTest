@@ -2,24 +2,21 @@
   "name": "angular-test-seed",
   "description": "Project to demostrate setting up Protractor, Grunt, Karma, and Angular",
   "version": "0.0.0",
-  "dependencies": {
-    "grunt": "~0.4.2"
-  },
   "devDependencies": {
     "angular": "^1.5.0",
     "angular-mocks": "^1.5.0",
-    "grunt-angular-templates": "~0.5.4",
-    "grunt-contrib-connect": "~0.5.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-karma": "~0.6.2",
-    "grunt-protractor-runner": "^0.2.4",
-    "grunt-run": "^0.2.2",
-    "karma": "~0.10",
-    "karma-coverage": "^0.2.4",
-    "karma-jasmine": "~0.1",
-    "karma-phantomjs-launcher": "^0.1.4",
+    "grunt": "^0.4.5",
+    "grunt-karma": "^0.12.1",
+    "grunt-run": "^0.5.2",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.19",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-coverage": "^0.5.3",
+    "karma-ie-launcher": "^0.2.0",
+    "karma-jasmine": "^0.3.7",
+    "karma-phantomjs-launcher": "^1.0.0",
     "phantomjs": "~1.9",
-    "protractor": "^0.21.0",
+    "phantomjs-prebuilt": "^2.1.4",
     "todomvc-app-css": "^1.0.1",
     "todomvc-common": "^1.0.1"
   },
@@ -27,6 +24,7 @@
     "update-webdriver": "webdriver-manager update",
     "postinstall": "webdriver-manager update",
     "test": "grunt test",
-    "pretest": "npm install"
+    "pretest": "npm install",
+    "start": "http-server ./ -a localhost -p 9000"
   }
 }
