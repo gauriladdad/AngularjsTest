@@ -62,7 +62,7 @@ module.exports = function(config){
     ngHtml2JsPreprocessor: {
       stripPrefix: 'app/'
     },
-    coverageReporter: {
+     coverageReporter: {
       // type of file to output, use text to output to console
       type : 'text',
       // directory where coverage results are saved
