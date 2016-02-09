@@ -40,21 +40,19 @@ module.exports = function(config){
       // 'app/partials/*.html': 'html2js'
       
       // test coverage
-      'js/controllers/*.js': ['jshint', 'coverage'],
-      'js/directives/*.js': ['jshint', 'coverage'],
-      'js/app.js': ['jshint', 'coverage']
+      'js/controllers/*.js': ['coverage'],
+      'js/directives/*.js': ['coverage'],
+      'js/app.js': ['coverage']
     },
 
     reporters: ['progress', 'coverage'],
 
     // list of karma plugins
     plugins : [
-      'karma-jshint-preprocessor',
       'karma-coverage',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       'karma-jasmine',
-      'karma-ng-html2js-preprocessor',
       'karma-phantomjs-launcher'
     ],
 

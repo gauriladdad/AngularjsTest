@@ -17,7 +17,6 @@
     "karma": "~0.10",
     "karma-coverage": "^0.2.4",
     "karma-jasmine": "~0.1",
-    "karma-jshint-preprocessor": "0.0.3",
     "karma-phantomjs-launcher": "^0.1.4",
     "phantomjs": "~1.9",
     "protractor": "^0.21.0"
