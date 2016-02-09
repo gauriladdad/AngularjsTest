@@ -64,6 +64,14 @@ describe('todomvc', function() {
 				expect(activePost.isSelected()).toBeFalsy();
 			});
 		});
+		
+		it('mark first todo as complete', function() {
+			element.all(by.repeater('todo in TC.todos')).then(function(posts) {
+                var activePost = posts[0].element(by.model('todo.completed'));
+				activePost.click();
+                expect(activePost.isSelected()).toBeTruthy();
+            });
+		});
     });
 
 });
