@@ -40,9 +40,9 @@ module.exports = function(config){
       // 'app/partials/*.html': 'html2js'
       
       // test coverage
-      'app/js/controllers/*.js': ['jshint', 'coverage'],
-      'app/js/directives/*.js': ['jshint', 'coverage'],
-      'app/js/app.js': ['jshint', 'coverage']
+      'js/controllers/*.js': ['jshint', 'coverage'],
+      'js/directives/*.js': ['jshint', 'coverage'],
+      'js/app.js': ['jshint', 'coverage']
     },
 
     reporters: ['progress', 'coverage'],
