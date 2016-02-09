@@ -25,13 +25,17 @@ describe('Controllers ::', function() {
 	
 	describe('todoCtrl', function() {
 
-		it('should be defined', function() {
+		it('todoCtrl instance should be available', function() {
 		  expect(todoCtrl).toBeDefined();
 		});
 		
 		// addTodo
-		it('should have an addTodo function', function() {
+		it('todoCtrl should have an addToDo function', function() {
 		  expect(todoCtrl.addTodo).toBeDefined();
+		});
+		
+		 it('should have an editTodo function', function() {
+			expect(todoCtrl.editTodo).toBeDefined();
 		});
 	});
 
@@ -66,4 +70,12 @@ describe('Controllers ::', function() {
 			expect(todoCtrl.newTodo.title).toBe('');
 		});
     });
+	
+	describe('editing todos', function() {
+		it('editedTodo object should be set with editTodo is invoked', function() {
+			var todo = { title: "test", completed: false };
+			todoCtrl.editTodo(todo);
+			expect(todoCtrl.editedTodo).toBe(todo);
+		});
+	});	
 });
