@@ -50,6 +50,14 @@ describe('Controllers ::', function() {
 		it('should have an removeTodo function', function() {
 			expect(todoCtrl.removeTodo).toBeDefined();
 		});
+		
+		it('should have a clearCompletedTodos function', function() {
+			expect(todoCtrl.removeTodo).toBeDefined();
+		});
+		
+		it('should have a markAll function', function() {
+			expect(todoCtrl.markAll).toBeDefined();
+		});
 	});
 
 	describe('adding todos', function() {
@@ -169,6 +177,21 @@ describe('Controllers ::', function() {
 			var todo = todoStorageMock.storage[1];
 			todoCtrl.removeTodo(todo);
 			expect(todoStorageMock.storage.length).toBe(1);
+		});
+    });
+	
+	describe('clearing completed Todos', function() {
+		it('clearCompletedTodos should remove all completed todos', function() {
+			todoCtrl.newTodo = {title : "to do 1", completed: false};
+			todoCtrl.addTodo();
+			todoCtrl.newTodo = {title : "to do 2", completed: true};
+			todoCtrl.addTodo();
+			todoCtrl.newTodo = {title : "to do 3", completed: true};
+			todoCtrl.addTodo();
+			
+			expect(todoCtrl.todos.length).toBe(3);
+			todoCtrl.clearCompletedTodos();
+			expect(todoCtrl.todos.length).toBe(1);
 		});
     });
 
