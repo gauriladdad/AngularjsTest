@@ -2,24 +2,25 @@ localStorage.clear();
 
 describe('Controllers ::', function() {
 	beforeEach(module('todomvc'));
- var scope, todoCtrl, location;
+	var scope, todoCtrl, location;
     var todoStorageMock = {
-      storage: [],
-      get: function () {
-        return this.storage;
-      },
-      put: function (value) {
-        this.storage = value;
-      }
+		storage: [],
+		get: function () {
+			return this.storage;
+		},
+		put: function (value) {
+			this.storage = value;
+		}
     };
-	 beforeEach(inject(function ($controller, $rootScope, $location) {
-      scope = $rootScope.$new();
-      todoStorageMock.storage = [];
-      location = $location;
-      todoCtrl = $controller('TodoCtrl', {
-        $scope: scope,
-        todoStorage: todoStorageMock
-      });
+	
+	beforeEach(inject(function ($controller, $rootScope, $location) {
+		scope = $rootScope.$new();
+		todoStorageMock.storage = [];
+		location = $location;
+		todoCtrl = $controller('TodoCtrl', {
+			$scope: scope,
+			todoStorage: todoStorageMock
+		});
     }));
 	
 	
@@ -34,8 +35,12 @@ describe('Controllers ::', function() {
 		  expect(todoCtrl.addTodo).toBeDefined();
 		});
 		
-		 it('should have an editTodo function', function() {
+		it('should have an editTodo function', function() {
 			expect(todoCtrl.editTodo).toBeDefined();
+		});
+		
+		it('should have an doneEditing function', function() {
+			expect(todoCtrl.doneEditing).toBeDefined();
 		});
 	});
 
@@ -76,6 +81,47 @@ describe('Controllers ::', function() {
 			var todo = { title: "test", completed: false };
 			todoCtrl.editTodo(todo);
 			expect(todoCtrl.editedTodo).toBe(todo);
+		});
+	});
+
+
+	describe('doneEditing todos', function() {
+		var todo = { title: "editing this todo", completed: false };
+		beforeEach(function() {
+			todoCtrl.newTodo.title = "new todo";
+			todoCtrl.addTodo();
+			todoCtrl.editTodo(todo);
+		}); 
+		
+		afterEach(function() {
+			todoStorageMock.storage = [];
+		});
+		
+		it('editedTodo should be set to empty object', function() {
+			expect(todoCtrl.editedTodo).not.toEqual({});
+			todoCtrl.doneEditing(todo);
+			expect(todoCtrl.editedTodo).toEqual({});
+		});
+
+		it('doneEditing should remove all trailing and following spaces in todo title', function () {
+			var todo = todoStorageMock.storage[0];
+			todo.title = ' update timesheet  ';
+
+			todoCtrl.doneEditing(todo);
+			expect(todoCtrl.todos[0].title).toBe('update timesheet');
+		});
+
+		it('doneEditing blank title check should be performed', function() {
+			todo.title = "";
+			todoCtrl.doneEditing(todo);
+			expect(todoStorageMock.storage.length).toBe(0);
+		});
+
+		it('doneEditing should update the item title right', function() {
+			var todo = todoStorageMock.storage[0];
+			todo.title = "check PR";
+			todoCtrl.doneEditing(todo);
+			expect(todoCtrl.todos[0].title).toBe('check PR');
 		});
 	});	
 });
