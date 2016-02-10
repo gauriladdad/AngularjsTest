@@ -166,7 +166,7 @@ describe('todomvc', function() {
             expect(todoPage.clearCompletedButton.isDisplayed()).toBeFalsy();
         });
     });
-	/* This test works sporadically and not consistently. Even adding sleep between actions results in same.
+	/* This test doesn't run consistently. Even adding sleep (amongst other solutions) between actions results in same.
 	describe('verify delete todo', function() {
         it('delete all todos', function() {
 			element.all(by.repeater('todo in TC.todos')).then(function(todos) {
@@ -200,9 +200,11 @@ verify edit item (by double clicking the first item in todo list)
 - double click the label, which will display the input component - add edit to it's text - verify text is "test edit"
 
 marking item as complete/incomplete
-- by default all todos created should be incomplete
-- now mark first todo in the list as complete - 
+1. by default all todos created should be incomplete
+2. now mark first todo in the list as complete - 
 - at this point remaining item count should be updated
+3. mark 2nd to do in the list as complete - check the status of checkbox
+now mark the same to do as incomplete - check the status of checkbox 
 
 click on link to view "Active" items
 - find the active todos link and click on it
@@ -217,5 +219,12 @@ verify clear all completed button
 - now that we have todos created clear completed button should be visible
 - click on clear completed button - total items reamining in list should be 2 and clear completed button not
 visible any more
-8*/
+
+verify delete to do 
+- take the first to do in the list 
+- hover on the list to make delete button visible
+- click on delete button 
+This test however is not running currently as it doesn't run consistently
+*/
+
 
