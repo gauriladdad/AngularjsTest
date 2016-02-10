@@ -17,30 +17,30 @@ var TodoPage = function() {
 describe('todomvc', function() {
   browser.get('/');
   
-    it("should load", function() {
+    it("Verify title on launching the app", function() {
     	 expect(browser.getTitle()).toBe('AngularJS • TodoMVC');
     });
 
     var todoPage = new TodoPage();
 
-    describe('on launching the site', function() {
-		it('todos list should be empty', function() {
+    describe('Check default screen elements', function() {
+		it('Todos list should be empty', function() {
             element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
                 expect(count).toEqual(0);
             });
     	});
 
-		it('footer should not be displayed', function() {
+		it('Footer should not be displayed', function() {
 			expect(todoPage.footer.isDisplayed()).toBeFalsy();
 		});
 	
-    	it('clear completed button should not be displayed', function() {
+    	it('Clear completed button should not be displayed', function() {
     	  	expect(todoPage.clearCompletedButton.isDisplayed()).toBeFalsy();
     	});
     });
 
-    describe('Add ToDo', function() {
-    	it('todo shold be successfully added to list', function() {
+    describe('Verify Add ToDo', function() {
+    	it('Todo should be successfully added to list', function() {
     	  	todoPage.setNewTodo('test');
     	  	todoPage.newTodoInput.sendKeys(protractor.Key.ENTER);
             //again get the list because it's now updated
@@ -48,13 +48,13 @@ describe('todomvc', function() {
             expect(count).toEqual(1); });
         });
 		
-		it('footer should be displayed', function() {
+		it('Footer should be displayed after adding a to do', function() {
 			expect(todoPage.footer.isDisplayed()).toBeTruthy();
 		});
     });
 
-    describe('Remaining todo count', function() {
-        it('upon adding todos remaining count should equal to number of items', function() {
+    describe('Verify remaining todo count display', function() {
+        it('Upon adding todos remaining count should equal number of todos created', function() {
             todoPage.setNewTodo('test 1');
             todoPage.newTodoInput.sendKeys(protractor.Key.ENTER);
             todoPage.setNewTodo('test 2');
@@ -64,8 +64,8 @@ describe('todomvc', function() {
         });
     });
 	
-	describe('verify in place editing', function() {
-		it('edit item through double click', function() {
+	describe('Verify in place editing', function() {
+		it('Double click on a Todo should show editable text, it should save the change successfully', function() {
 			element.all(by.repeater('todo in TC.todos')).then(function(todos) {
 				var label = todos[0].element(by.tagName('label'));
 				browser.actions().doubleClick(label).perform();
@@ -77,16 +77,16 @@ describe('todomvc', function() {
 		});
 	});
 	
-	describe('Mark todos as completed/incomplete', function() {
+	describe('Verify marking Todos as completed/incomplete', function() {
   		
-		it('all todos should be incomplete', function() {
+		it('All todos should be incomplete after creation', function() {
 			element.all(by.repeater('todo in TC.todos')).each(function(todo, index) {
 				var activeTodo = todo.element(by.model('todo.completed'));
 				expect(activeTodo.isSelected()).toBeFalsy();
 			});
 		});
 		
-		it('mark first todo as complete', function() {
+		it('Clicking on checkbox of first Todo should mark it as complete', function() {
 			element.all(by.repeater('todo in TC.todos')).then(function(todos) {
                 var activePost = todos[0].element(by.model('todo.completed'));
 				activePost.click();
@@ -96,7 +96,7 @@ describe('todomvc', function() {
             });
 		});
 		
-		it('mark 2nd to do as completed and later mark it incomplete', function() {
+		it('Click and unclick of checkbox for a Todo should leave the Todo as incomplete', function() {
 			element.all(by.repeater('todo in TC.todos')).then(function(todos) {
                 var activePost = todos[1].element(by.model('todo.completed'));
 				activePost.click();
@@ -111,8 +111,8 @@ describe('todomvc', function() {
     });
 	
 	//at this point there are 3 todos and 1 has been marked as completed
-	describe('Active items link test', function() {
-        it('Active items list should change URL and list items to 2', function() {
+	describe('Verify active link', function() {
+        it('Clicking on active list should change URL and update list items to 2', function() {
 			element.all(by.tagName('a')).filter(function(elem, index) {
 				return elem.getAttribute('href').then(function(text) {
 					return text === 'http://localhost:9000/#/active';
@@ -128,8 +128,8 @@ describe('todomvc', function() {
 	});
 	
 	//at this point there are 3 todos and 1 has been marked as completed
-	describe('Completed items link test', function() {
-        it('Completed items list should change URL and list items to 1', function() {
+	describe('Verify completed link', function() {
+        it('Clicking on completed link should change URL and update list items to 1', function() {
 			element.all(by.tagName('a')).filter(function(elem, index) {
 				return elem.getAttribute('href').then(function(text) {
 					return text === 'http://localhost:9000/#/completed';
@@ -151,12 +151,13 @@ describe('todomvc', function() {
 		});
 	});
 	
-	describe('Clear completed button working', function() {
-        it('Clear completed button visible after a complete item', function() {
+	describe('Verify clear completed button behaviour', function() {
+        it('Clear completed button should be visible as we have a completed todo', function() {
             expect(todoPage.clearCompletedButton.isDisplayed()).toBeTruthy();
         });
         
-        it('Clear completed button should be hidden after click', function() {
+		//upon click of clear completed button, it should be hidden as there are no more complete todos
+        it('Clear completed button should be hidden once clicked, number of items in the list should be updated', function() {
             todoPage.clearCompletedButton.click();
 			
 			element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
