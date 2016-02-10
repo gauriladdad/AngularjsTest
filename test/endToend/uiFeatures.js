@@ -23,9 +23,8 @@ describe('todomvc', function() {
 
     var todoPage = new TodoPage();
 
-    describe('while loading the site', function() {
-
-    	it('todos list should be empty', function() {
+    describe('on launching the site', function() {
+		it('todos list should be empty', function() {
             element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
                 expect(count).toEqual(0);
             });
@@ -67,10 +66,10 @@ describe('todomvc', function() {
 	
 	describe('verify in place editing', function() {
 		it('edit item through double click', function() {
-			element.all(by.repeater('todo in TC.todos')).then(function(posts) {
-				var label = posts[0].element(by.tagName('label'));
+			element.all(by.repeater('todo in TC.todos')).then(function(todos) {
+				var label = todos[0].element(by.tagName('label'));
 				browser.actions().doubleClick(label).perform();
-				var input = posts[0].element(by.css('.edit'));
+				var input = todos[0].element(by.css('.edit'));
 				input.sendKeys(" edit");
 				input.sendKeys(protractor.Key.ENTER);
 				expect(label.getText()).toEqual('test edit');
@@ -82,19 +81,32 @@ describe('todomvc', function() {
   		
 		it('all todos should be incomplete', function() {
 			element.all(by.repeater('todo in TC.todos')).each(function(todo, index) {
-				var activePost = todo.element(by.model('todo.completed'));
-				expect(activePost.isSelected()).toBeFalsy();
+				var activeTodo = todo.element(by.model('todo.completed'));
+				expect(activeTodo.isSelected()).toBeFalsy();
 			});
 		});
 		
 		it('mark first todo as complete', function() {
-			element.all(by.repeater('todo in TC.todos')).then(function(posts) {
-                var activePost = posts[0].element(by.model('todo.completed'));
+			element.all(by.repeater('todo in TC.todos')).then(function(todos) {
+                var activePost = todos[0].element(by.model('todo.completed'));
 				activePost.click();
                 expect(activePost.isSelected()).toBeTruthy();
 				
 				expect(todoPage.remainingCount.getText()).toEqual('2 items left');
             });
+		});
+		
+		it('mark 2nd to do as completed and later mark it incomplete', function() {
+			element.all(by.repeater('todo in TC.todos')).then(function(todos) {
+                var activePost = todos[1].element(by.model('todo.completed'));
+				activePost.click();
+                expect(activePost.isSelected()).toBeTruthy();
+				
+				activePost.click();
+                expect(activePost.isSelected()).toBeFalsy();
+				//just to observer the behaviour while running
+				browser.sleep(1000);
+			});
 		});
     });
 	
@@ -126,30 +138,84 @@ describe('todomvc', function() {
 			
 			expect(browser.getCurrentUrl()).toEqual('http://localhost:9000/#/completed');
 				
-			element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
+			element.all(by.repeater( 'todo in TC.todos')).count().then(function(count) {
 				expect(count).toEqual(1); 
 			});
-		});
-	});
-	
-	describe('Clear completed button working', function() {
-        it('Clear completed button visible after a complete item', function() {
-		
+			
 			//reset the UI on original page
 			element.all(by.tagName('a')).filter(function(elem, index) {
 				return elem.getAttribute('href').then(function(text) {
 					return text === 'http://localhost:9000/#/';
 				});
 			}).click();
-			
+		});
+	});
+	
+	describe('Clear completed button working', function() {
+        it('Clear completed button visible after a complete item', function() {
             expect(todoPage.clearCompletedButton.isDisplayed()).toBeTruthy();
         });
         
         it('Clear completed button should be hidden after click', function() {
             todoPage.clearCompletedButton.click();
+			
+			element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
+				expect(count).toEqual(2); 
+			});
+			
             expect(todoPage.clearCompletedButton.isDisplayed()).toBeFalsy();
         });
     });
-
-	
+	/* This test works sporadically and not consistently. Even adding sleep between actions results in same.
+	describe('verify delete todo', function() {
+        it('delete all todos', function() {
+			element.all(by.repeater('todo in TC.todos')).then(function(todos) {
+				browser.actions().mouseMove(todos[0]).perform().then(function(){
+					var deleteTodoButton = todos[0].element(by.tagName('button'));
+					//browser.wait(waitForCssValue(obj, 'color', color2), 5000);
+					browser.actions().click(deleteTodoButton).perform().then(function() {
+						element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
+							expect(count).toEqual(1); 
+						}); 						
+					});
+				}) 
+			});
+		});
+    });	*/
 });
+/* tests covered in below sequence 
+launch application- 
+- to do list should be empty
+- footer should not be displayed
+- clear completed button should not be displayed
+
+add to do -
+- add a single to do and verify total number of items shown in the list
+- footer should be displayed at this point
+
+remaining todo count - 
+add 2 more todos and verify remaining text is coming up right as - 3 items left
+
+verify edit item (by double clicking the first item in todo list)
+- double click the label, which will display the input component - add edit to it's text - verify text is "test edit"
+
+marking item as complete/incomplete
+- by default all todos created should be incomplete
+- now mark first todo in the list as complete - 
+- at this point remaining item count should be updated
+
+click on link to view "Active" items
+- find the active todos link and click on it
+- the total number of todos in list should be 2
+
+click on link to view "Completed" items
+- find the completed todos link and click on it
+- the total number of todos in list should be 1
+- click on All items link
+
+verify clear all completed button
+- now that we have todos created clear completed button should be visible
+- click on clear completed button - total items reamining in list should be 2 and clear completed button not
+visible any more
+8*/
+
