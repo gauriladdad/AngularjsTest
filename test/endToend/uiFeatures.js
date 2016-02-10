@@ -40,12 +40,35 @@ describe('todomvc', function() {
     });
 
     describe('Verify Add ToDo', function() {
+		it('Todo should not be created if an empty text string was entered', function() {
+    	  	todoPage.setNewTodo('  ');
+    	  	todoPage.newTodoInput.sendKeys(protractor.Key.ENTER);
+            //again get the list because it's now updated
+            element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
+				expect(count).toEqual(0); 
+			});
+        });
+		
     	it('Todo should be successfully added to list', function() {
     	  	todoPage.setNewTodo('test');
     	  	todoPage.newTodoInput.sendKeys(protractor.Key.ENTER);
             //again get the list because it's now updated
             element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
-            expect(count).toEqual(1); });
+				expect(count).toEqual(1); 
+			});
+        });
+		
+		it('Todo text should be trimmed before creation', function() {
+    	  	todoPage.setNewTodo(' test 1 ');
+    	  	todoPage.newTodoInput.sendKeys(protractor.Key.ENTER);
+            element.all(by.repeater('todo in TC.todos')).then(function(todos) {
+				var label = todos[1].element(by.tagName('label'));
+				expect(label.getText()).toEqual("test 1");
+			});	
+        });
+		
+		it('New Todo input should be cleared after adding a Todo', function() {
+    	  	expect(todoPage.newTodoInput.getText()).toEqual("");
         });
 		
 		it('Footer should be displayed after adding a to do', function() {
@@ -54,9 +77,7 @@ describe('todomvc', function() {
     });
 
     describe('Verify remaining todo count display', function() {
-        it('Upon adding todos remaining count should equal number of todos created', function() {
-            todoPage.setNewTodo('test 1');
-            todoPage.newTodoInput.sendKeys(protractor.Key.ENTER);
+        it('Upon adding Todo remaining count should equal number of todos created', function() {
             todoPage.setNewTodo('test 2');
             todoPage.newTodoInput.sendKeys(protractor.Key.ENTER);
             
@@ -70,9 +91,79 @@ describe('todomvc', function() {
 				var label = todos[0].element(by.tagName('label'));
 				browser.actions().doubleClick(label).perform();
 				var input = todos[0].element(by.css('.edit'));
+				
+				var activeTodo = todos[0].element(by.model('todo.completed'));
+				expect(activeTodo.isDisplayed()).toBeFalsy();
+				
 				input.sendKeys(" edit");
 				input.sendKeys(protractor.Key.ENTER);
 				expect(label.getText()).toEqual('test edit');
+			});
+		});
+		
+		it('Hitting escape while editing should not save changes', function() {
+			element.all(by.repeater('todo in TC.todos')).then(function(todos) {
+				var label = todos[1].element(by.tagName('label'));
+				browser.actions().doubleClick(label).perform();
+				var input = todos[1].element(by.css('.edit'));
+				input.sendKeys(" edit");
+				input.sendKeys(protractor.Key.ESCAPE);
+				expect(label.getText()).toEqual('test 1');
+			});
+		});
+		
+		it('Adding empty text while editing should remove the Todo', function() {
+			//create a dummy to do for this test
+			todoPage.setNewTodo('t');
+            todoPage.newTodoInput.sendKeys(protractor.Key.ENTER);
+			
+			element.all(by.repeater('todo in TC.todos')).then(function(todos) {
+				var label = todos[3].element(by.tagName('label'));
+				browser.actions().doubleClick(label).perform();
+				var input = todos[3].element(by.css('.edit'));
+				input.sendKeys(protractor.Key.BACK_SPACE);
+				input.sendKeys(protractor.Key.ENTER);
+				element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
+					expect(count).toEqual(3); 
+				});
+			});
+		});
+		
+		it('Adding empty spaces while editing should be trimmed while saving the ToDo', function() {
+			//create a dummy to do for this test
+			todoPage.setNewTodo('test 3');
+            todoPage.newTodoInput.sendKeys(protractor.Key.ENTER);
+			
+			element.all(by.repeater('todo in TC.todos')).then(function(todos) {
+				var label = todos[3].element(by.tagName('label'));
+				browser.actions().doubleClick(label).perform();
+				
+				var input = todos[3].element(by.css('.edit'));
+				input.sendKeys(" ");
+				input.sendKeys(protractor.Key.ENTER);
+				expect(label.getText()).toEqual('test 3');
+			});
+		});
+	});
+	
+	describe('Mark all as completed', function() {
+		it('should allow me to mark all items as completed', function() {
+			var toggleAll = element(by.id('toggle-all'));
+			toggleAll.click();
+			
+			element.all(by.repeater('todo in TC.todos')).each(function(todo, index) {
+				var activeTodo = todo.element(by.model('todo.completed'));
+				expect(activeTodo.isSelected()).toBeTruthy();
+			});
+		});
+		
+		it('should allow me to clear the completion state of all items', function() {
+			var toggleAll = element(by.id('toggle-all'));
+			toggleAll.click();
+			
+			element.all(by.repeater('todo in TC.todos')).each(function(todo, index) {
+				var activeTodo = todo.element(by.model('todo.completed'));
+				expect(activeTodo.isSelected()).toBeFalsy();
 			});
 		});
 	});
@@ -92,7 +183,7 @@ describe('todomvc', function() {
 				activePost.click();
                 expect(activePost.isSelected()).toBeTruthy();
 				
-				expect(todoPage.remainingCount.getText()).toEqual('2 items left');
+				expect(todoPage.remainingCount.getText()).toEqual('3 items left');
             });
 		});
 		
@@ -122,7 +213,7 @@ describe('todomvc', function() {
 			expect(browser.getCurrentUrl()).toEqual('http://localhost:9000/#/active');
 				
 			element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
-				expect(count).toEqual(2); 
+				expect(count).toEqual(3); 
 			});
 		});
 	});
@@ -161,28 +252,45 @@ describe('todomvc', function() {
             todoPage.clearCompletedButton.click();
 			
 			element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
-				expect(count).toEqual(2); 
+				expect(count).toEqual(3); 
 			});
 			
             expect(todoPage.clearCompletedButton.isDisplayed()).toBeFalsy();
         });
     });
-	/* This test doesn't run consistently. Even adding sleep (amongst other solutions) between actions results in same.
+	
 	describe('verify delete todo', function() {
-        it('delete all todos', function() {
+        it('delete todo button should display on mouse hover', function() {
 			element.all(by.repeater('todo in TC.todos')).then(function(todos) {
 				browser.actions().mouseMove(todos[0]).perform().then(function(){
 					var deleteTodoButton = todos[0].element(by.tagName('button'));
-					//browser.wait(waitForCssValue(obj, 'color', color2), 5000);
+					expect(deleteTodoButton.isDisplayed()).toBeTruthy();
+					/* //The click event doesn't work consistently
+					//deleteTodoButton.click(); doesn't work.
+					//adding sleep between actions doesn't work consistently. 
 					browser.actions().click(deleteTodoButton).perform().then(function() {
 						element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
 							expect(count).toEqual(1); 
 						}); 						
-					});
+					});*/
 				}) 
 			});
 		});
-    });	*/
+    });	
+	
+	describe('Verify data persistence on page refresh', function() {
+		it('Page refresh should still show the same data as last', function() {
+			var existingToDoCount = 0;
+			element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
+				existingToDoCount = count;
+			});			
+			
+			browser.refresh();
+			element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
+				expect(count).toEqual(existingToDoCount);
+			});	
+		});
+	});
 });
 /* tests covered in below sequence 
 launch application- 
@@ -191,14 +299,26 @@ launch application-
 - clear completed button should not be displayed
 
 add to do -
-- add a single to do and verify total number of items shown in the list
-- footer should be displayed at this point
+1. Todo should not be created if an empty text string was entered
+2. add a single to do and verify total number of items shown in the list.
+3. Todo text should be trimmed before creation.
+4. New Todo input should be cleared after adding a Todo
+5. footer should be displayed at this point
 
 remaining todo count - 
 add 2 more todos and verify remaining text is coming up right as - 3 items left
 
 verify edit item (by double clicking the first item in todo list)
-- double click the label, which will display the input component - add edit to it's text - verify text is "test edit"
+1. double click on first Todo, which will display the input component 
+- at this point other controls like checkbox shouldn't be displayed.
+- add edit to it's text - upon Enter - verify text is "test edit"
+
+2. double click on second Todo, which will display the input component 
+- add edit to it's text - upon Escape - verify text is still same "test 1"
+
+3. Replacing the Todo text by an empty string while editing should remove the Todo.
+
+4. Adding empty spaces while editing should be trimmed while saving the ToDo.
 
 marking item as complete/incomplete
 1. by default all todos created should be incomplete
@@ -224,8 +344,11 @@ visible any more
 verify delete to do 
 - take the first to do in the list 
 - hover on the list to make delete button visible
-- click on delete button 
-This test however is not running currently as it doesn't run consistently
+- click on delete button ** This test however is not running currently as it doesn't run consistently
+
+Verify data persistence on page refresh
+- save current todo count
+- refresh the page - the number of Todos should still match the count in above step
 */
 
 
