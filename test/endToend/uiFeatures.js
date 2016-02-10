@@ -98,8 +98,50 @@ describe('todomvc', function() {
 		});
     });
 	
+	//at this point there are 3 todos and 1 has been marked as completed
+	describe('Active items link test', function() {
+        it('Active items list should change URL and list items to 2', function() {
+			element.all(by.tagName('a')).filter(function(elem, index) {
+				return elem.getAttribute('href').then(function(text) {
+					return text === 'http://localhost:9000/#/active';
+				});
+			}).click();
+			
+			expect(browser.getCurrentUrl()).toEqual('http://localhost:9000/#/active');
+				
+			element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
+				expect(count).toEqual(2); 
+			});
+		});
+	});
+	
+	//at this point there are 3 todos and 1 has been marked as completed
+	describe('Completed items link test', function() {
+        it('Completed items list should change URL and list items to 1', function() {
+			element.all(by.tagName('a')).filter(function(elem, index) {
+				return elem.getAttribute('href').then(function(text) {
+					return text === 'http://localhost:9000/#/completed';
+				});
+			}).click();
+			
+			expect(browser.getCurrentUrl()).toEqual('http://localhost:9000/#/completed');
+				
+			element.all(by.repeater('todo in TC.todos')).count().then(function(count) {
+				expect(count).toEqual(1); 
+			});
+		});
+	});
+	
 	describe('Clear completed button working', function() {
         it('Clear completed button visible after a complete item', function() {
+		
+			//reset the UI on original page
+			element.all(by.tagName('a')).filter(function(elem, index) {
+				return elem.getAttribute('href').then(function(text) {
+					return text === 'http://localhost:9000/#/';
+				});
+			}).click();
+			
             expect(todoPage.clearCompletedButton.isDisplayed()).toBeTruthy();
         });
         
