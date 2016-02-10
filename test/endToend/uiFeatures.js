@@ -71,11 +71,10 @@ describe('todomvc', function() {
 				var label = posts[0].element(by.tagName('label'));
 				browser.actions().doubleClick(label).perform();
 				var input = posts[0].element(by.css('.edit'));
-				input.sendKeys("my new value");
+				input.sendKeys(" edit");
 				input.sendKeys(protractor.Key.ENTER);
-				
-				//add expects and verify text
-				});
+				expect(label.getText()).toEqual('test edit');
+			});
 		});
 	});
 	
