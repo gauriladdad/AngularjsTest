@@ -21,10 +21,7 @@
     "todomvc-common": "^1.0.1"
   },
   "scripts": {
-    "update-webdriver": "webdriver-manager update",
-    "postinstall": "webdriver-manager update",
-    "test": "grunt test",
-    "pretest": "npm install",
+    "unit": "grunt karma",
     "start": "http-server ./ -a localhost -p 9000"
   }
 }
