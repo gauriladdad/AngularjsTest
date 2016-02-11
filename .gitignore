@@ -4,3 +4,4 @@ node_modules
 blog
 test-results
 test/reports/
+test/unit-coverage/

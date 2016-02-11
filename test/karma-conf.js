@@ -36,26 +36,30 @@ module.exports = function(config){
       'js/app.js': ['coverage']
     },
 
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress', 'coverage', 'jenkins'],
 
     // list of karma plugins
     plugins : [
       'karma-coverage',
       'karma-chrome-launcher',
       'karma-jasmine',
-      'karma-phantomjs-launcher'
+	   "karma-junit-reporter",
+      'karma-phantomjs-launcher',
+	  'karma-jenkins-reporter'
     ],
 
      coverageReporter: {
       // type of file to output, use text to output to console
       type : 'text',
       // directory where coverage results are saved
-      dir: 'test-results/coverage/' 
+      dir: 'test/unit-coverage/' ,
       // if type is text or text-summary, you can set the file name
-      // file: 'coverage.txt' 
+       file: 'coverage.txt' 
     },
-    junitReporter: {
-      outputFile: 'test-results/junit-results.xml'
-    }
+	jenkinsReporter: {
+    outputFile: 'test/reports/test-client-report_' + Date.now() + '.xml',
+    suite: 'warehouse-web',
+    classnameSuffix: 'browser-test'
+	},	
 })}
 

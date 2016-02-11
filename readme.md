@@ -37,4 +37,8 @@ remember it's configured to generate individual report based on time instead upd
  "start": "http-server ./ -a localhost -p 9000",
     "update-webdriver": "webdriver-manager update",
     "postinstall": "webdriver-manager update",
-    
+	
+==========XML reporter for Karma
+karma-jenkins-reporter is being used - note it's addition in karma-config.js under plugins, reporter etc.
+  
+=====grunt.cmd path - C:\Users\Gauri\AppData\Roaming\npm  
