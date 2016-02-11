@@ -35,6 +35,6 @@
     "unit": "grunt karma",
     "update-webdriver": "webdriver-manager update",
     "postinstall": "webdriver-manager update",
-    "test": "node node_modules/grunt-cli/bin/grunt endToend-test"
+    "test": "node node_modules/grunt-cli/bin/grunt test"
   }
 }

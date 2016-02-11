@@ -57,7 +57,7 @@ module.exports = function(config){
 		file: 'coverage.txt' 
     },
 	jenkinsReporter: {
-		outputFile: 'test/reports/test-client-report_' + Date.now() + '.xml',
+		outputFile: 'test/reports/test-client-report-' + Date.now() + '.xml',
 		suite: 'warehouse-web',
 		classnameSuffix: 'browser-test'
 	}
