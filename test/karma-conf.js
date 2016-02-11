@@ -36,7 +36,7 @@ module.exports = function(config){
       'js/app.js': ['coverage']
     },
 
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress', 'coverage', 'jenkins'],
 
     // list of karma plugins
     plugins : [
@@ -44,7 +44,8 @@ module.exports = function(config){
       'karma-chrome-launcher',
       'karma-jasmine',
 	   "karma-junit-reporter",
-      'karma-phantomjs-launcher'
+      'karma-phantomjs-launcher',
+	  'karma-jenkins-reporter'
     ],
 
      coverageReporter: {
@@ -54,6 +55,11 @@ module.exports = function(config){
 		dir: 'test/unit-coverage/' ,
 		// if type is text or text-summary, you can set the file name
 		file: 'coverage.txt' 
-    }
+    },
+	jenkinsReporter: {
+		outputFile: 'test/reports/test-client-report-' + Date.now() + '.xml',
+		suite: 'warehouse-web',
+		classnameSuffix: 'browser-test'
+	}
 })}
 

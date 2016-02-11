@@ -86,10 +86,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-protractor-runner');
 	grunt.loadNpmTasks('grunt-run');
 
+	grunt.registerTask('serve', ['karma:unit:start', 'run:mock_server', 'connect:livereload:start']);
+  
 	grunt.registerTask('unit-test', ['karma:unit:start']);
 	
 	grunt.registerTask('endToend-test', ['connect:test',  'protractor:continuous']);
 
-	grunt.registerTask('test', ['karma:unit:start', 'connect:test', 'run:mock_server', 'protractor:endToend']);
+	grunt.registerTask('test', ['karma:unit:start', 'connect:test', 'run:mock_server']);//, 'protractor:endToend']);
 
 };
