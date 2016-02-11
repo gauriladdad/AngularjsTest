@@ -1,0 +1,3 @@
+general:
+  artifacts:
+    - "test/reports" # relative to the build directory
