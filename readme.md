@@ -44,3 +44,8 @@ karma-jenkins-reporter is being used - note it's addition in karma-config.js und
 test/reports/*.xml
 
 =====grunt.cmd path - C:\Users\Gauri\AppData\Roaming\npm  
+
+tests ran with push - remove plugins with conflict grunt-karma requirement
+npm install -- one windows command to execute
+npm test -- as one windows command to execute
+package.json doesn't have karma-junit and karma-ie-launcher

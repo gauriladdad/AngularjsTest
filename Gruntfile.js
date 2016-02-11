@@ -92,6 +92,6 @@ module.exports = function(grunt) {
 	
 	grunt.registerTask('endToend-test', ['connect:test',  'protractor:continuous']);
 
-	grunt.registerTask('test', ['karma:unit:start', 'connect:test', 'run:mock_server']);//, 'protractor:endToend']);
+	grunt.registerTask('test', ['karma:unit:start', 'connect:test', 'run:mock_server','protractor:endToend']);
 
 };
