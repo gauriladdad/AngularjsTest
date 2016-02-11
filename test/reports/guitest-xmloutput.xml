@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+ <testsuite name="todomvc" timestamp="2016-02-11T15:01:20" hostname="localhost" time="18.165" errors="0" tests="1" skipped="0" failures="0">
+  <testcase classname="todomvc" name="Verify title on launching the app" time="2.614">
+  </testcase>
+ </testsuite>
+ <testsuite name="todomvc.Check default screen elements" timestamp="2016-02-11T15:01:23" hostname="localhost" time="0.596" errors="0" tests="3" skipped="0" failures="0">
+  <testcase classname="todomvc.Check default screen elements" name="Todos list should be empty" time="0.109">
+  </testcase>
+  <testcase classname="todomvc.Check default screen elements" name="Footer should not be displayed" time="0.287">
+  </testcase>
+  <testcase classname="todomvc.Check default screen elements" name="Clear completed button should not be displayed" time="0.2">
+  </testcase>
+ </testsuite>
+ <testsuite name="todomvc.Verify Add ToDo" timestamp="2016-02-11T15:01:23" hostname="localhost" time="2.846" errors="0" tests="5" skipped="0" failures="0">
+  <testcase classname="todomvc.Verify Add ToDo" name="Todo should not be created if an empty text string was entered" time="0.716">
+  </testcase>
+  <testcase classname="todomvc.Verify Add ToDo" name="Todo should be successfully added to list" time="0.786">
+  </testcase>
+  <testcase classname="todomvc.Verify Add ToDo" name="Todo text should be trimmed before creation" time="0.871">
+  </testcase>
+  <testcase classname="todomvc.Verify Add ToDo" name="New Todo input should be cleared after adding a Todo" time="0.203">
+  </testcase>
+  <testcase classname="todomvc.Verify Add ToDo" name="Footer should be displayed after adding a to do" time="0.27">
+  </testcase>
+ </testsuite>
+ <testsuite name="todomvc.Verify remaining todo count display" timestamp="2016-02-11T15:01:26" hostname="localhost" time="0.765" errors="0" tests="1" skipped="0" failures="0">
+  <testcase classname="todomvc.Verify remaining todo count display" name="Upon adding Todo remaining count should equal number of todos created" time="0.765">
+  </testcase>
+ </testsuite>
+ <testsuite name="todomvc.Verify in place editing" timestamp="2016-02-11T15:01:27" hostname="localhost" time="4" errors="0" tests="4" skipped="0" failures="0">
+  <testcase classname="todomvc.Verify in place editing" name="Double click on a Todo should show editable text, it should save the change successfully" time="1.157">
+  </testcase>
+  <testcase classname="todomvc.Verify in place editing" name="Hitting escape while editing should not save changes" time="0.766">
+  </testcase>
+  <testcase classname="todomvc.Verify in place editing" name="Adding empty text while editing should remove the Todo" time="1.019">
+  </testcase>
+  <testcase classname="todomvc.Verify in place editing" name="Adding empty spaces while editing should be trimmed while saving the ToDo" time="1.058">
+  </testcase>
+ </testsuite>
+ <testsuite name="todomvc.Mark all as completed" timestamp="2016-02-11T15:01:31" hostname="localhost" time="1.394" errors="0" tests="2" skipped="0" failures="0">
+  <testcase classname="todomvc.Mark all as completed" name="should allow me to mark all items as completed" time="0.765">
+  </testcase>
+  <testcase classname="todomvc.Mark all as completed" name="should allow me to clear the completion state of all items" time="0.628">
+  </testcase>
+ </testsuite>
+ <testsuite name="todomvc.Verify marking Todos as completed/incomplete" timestamp="2016-02-11T15:01:32" hostname="localhost" time="2.299" errors="0" tests="3" skipped="0" failures="0">
+  <testcase classname="todomvc.Verify marking Todos as completed/incomplete" name="All todos should be incomplete after creation" time="0.313">
+  </testcase>
+  <testcase classname="todomvc.Verify marking Todos as completed/incomplete" name="Clicking on checkbox of first Todo should mark it as complete" time="0.473">
+  </testcase>
+  <testcase classname="todomvc.Verify marking Todos as completed/incomplete" name="Click and unclick of checkbox for a Todo should leave the Todo as incomplete" time="1.513">
+  </testcase>
+ </testsuite>
+ <testsuite name="todomvc.Verify active link" timestamp="2016-02-11T15:01:35" hostname="localhost" time="0.741" errors="0" tests="1" skipped="0" failures="0">
+  <testcase classname="todomvc.Verify active link" name="Clicking on active list should change URL and update list items to 2" time="0.741">
+  </testcase>
+ </testsuite>
+ <testsuite name="todomvc.Verify completed link" timestamp="2016-02-11T15:01:35" hostname="localhost" time="1.243" errors="0" tests="1" skipped="0" failures="0">
+  <testcase classname="todomvc.Verify completed link" name="Clicking on completed link should change URL and update list items to 1" time="1.243">
+  </testcase>
+ </testsuite>
+ <testsuite name="todomvc.Verify clear completed button behaviour" timestamp="2016-02-11T15:01:37" hostname="localhost" time="0.559" errors="0" tests="2" skipped="0" failures="0">
+  <testcase classname="todomvc.Verify clear completed button behaviour" name="Clear completed button should be visible as we have a completed todo" time="0.146">
+  </testcase>
+  <testcase classname="todomvc.Verify clear completed button behaviour" name="Clear completed button should be hidden once clicked, number of items in the list should be updated" time="0.413">
+  </testcase>
+ </testsuite>
+ <testsuite name="todomvc.verify delete todo" timestamp="2016-02-11T15:01:37" hostname="localhost" time="0.262" errors="0" tests="1" skipped="0" failures="1">
+  <testcase classname="todomvc.verify delete todo" name="delete todo button should display on mouse hover" time="0.262">
+   <failure type="toBeTruthy" message="Expected false to be truthy."><![CDATA[Error: Failed expectation
+    at C:\Users\Gauri\Downloads\angularjs-perf\test\endToend\automation.js:267:45
+    at [object Object].promise.Promise.goog.defineClass.invokeCallback_ (C:/Users/Gauri/Downloads/angularjs-perf/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/../webdriver/promise.js:1337:14)
+    at [object Object].promise.ControlFlow.goog.defineClass.goog.defineClass.abort_.error.executeNext_.execute_ (C:/Users/Gauri/Downloads/angularjs-perf/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/../webdriver/promise.js:2776:14)
+    at [object Object].promise.ControlFlow.goog.defineClass.goog.defineClass.abort_.error.executeNext_ (C:/Users/Gauri/Downloads/angularjs-perf/node_modules/grunt-protractor-runner/node_modules/protractor/node_modules/selenium-webdriver/lib/goog/../webdriver/promise.js:2758:21)
+    at goog.async.run.processWorkQueue (C:\Users\Gauri\Downloads\angularjs-perf\node_modules\grunt-protractor-runner\node_modules\protractor\node_modules\selenium-webdriver\lib\goog\async\run.js:124:15)
+    at process._tickCallback (node.js:366:9)]]>
+   </failure>
+  </testcase>
+ </testsuite>
+ <testsuite name="todomvc.Verify data persistence on page refresh" timestamp="2016-02-11T15:01:37" hostname="localhost" time="0.828" errors="0" tests="1" skipped="0" failures="0">
+  <testcase classname="todomvc.Verify data persistence on page refresh" name="Page refresh should still show the same data as last" time="0.828">
+  </testcase>
+ </testsuite>
+</testsuites>
