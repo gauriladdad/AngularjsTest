@@ -48,9 +48,9 @@ module.exports = function(config){
 
      coverageReporter: {
 		// type of file to output, use text to output to console
-		type : 'html',
+		type : 'cobertura',
 		// directory where coverage results are saved
-		dir: 'test/unit-coverage/' ,
+		dir: 'test/reports/' ,
 		// if type is text or text-summary, you can set the file name
 		//file: 'coverage.txt' 
     },
