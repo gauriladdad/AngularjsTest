@@ -40,5 +40,7 @@ remember it's configured to generate individual report based on time instead upd
 	
 ==========XML reporter for Karma
 karma-jenkins-reporter is being used - note it's addition in karma-config.js under plugins, reporter etc.
-  
+===========under publish junit test reports
+test/reports/*.xml
+
 =====grunt.cmd path - C:\Users\Gauri\AppData\Roaming\npm  
