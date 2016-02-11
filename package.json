@@ -6,7 +6,10 @@
     "angular": "^1.5.0",
     "angular-mocks": "^1.5.0",
     "grunt": "^0.4.5",
+    "grunt-contrib-connect": "^0.11.2",
+    "grunt-jasmine-node": "^0.3.1",
     "grunt-karma": "^0.12.1",
+    "grunt-protractor-runner": "^3.0.0",
     "grunt-run": "^0.5.2",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.19",
@@ -17,11 +20,15 @@
     "karma-phantomjs-launcher": "^1.0.0",
     "phantomjs": "~1.9",
     "phantomjs-prebuilt": "^2.1.4",
+    "protractor": "^3.1.1",
     "todomvc-app-css": "^1.0.1",
     "todomvc-common": "^1.0.1"
   },
   "scripts": {
     "unit": "grunt karma",
-    "start": "http-server ./ -a localhost -p 9000"
+    "update-webdriver": "webdriver-manager update",
+    "postinstall": "webdriver-manager update",
+    "test": "grunt test",
+    "pretest": "npm install"
   }
 }
