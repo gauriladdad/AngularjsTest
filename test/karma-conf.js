@@ -45,15 +45,6 @@ module.exports = function(config){
       'karma-jasmine',
 	  'karma-jenkins-reporter'
     ],
-
-     coverageReporter: {
-		// type of file to output, use text to output to console
-		type : 'cobertura',
-		// directory where coverage results are saved
-		dir: 'test/reports/' ,
-		// if type is text or text-summary, you can set the file name
-		//file: 'coverage.txt' 
-    },
 	jenkinsReporter: {
 		outputFile: 'test/reports/test-client-report-' + Date.now() + '.xml',
 		suite: 'warehouse-web',
