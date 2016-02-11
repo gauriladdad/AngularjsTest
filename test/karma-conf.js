@@ -48,11 +48,11 @@ module.exports = function(config){
 
      coverageReporter: {
 		// type of file to output, use text to output to console
-		type : 'text',
+		type : 'html',
 		// directory where coverage results are saved
 		dir: 'test/unit-coverage/' ,
 		// if type is text or text-summary, you can set the file name
-		file: 'coverage.txt' 
+		//file: 'coverage.txt' 
     },
 	jenkinsReporter: {
 		outputFile: 'test/reports/test-client-report-' + Date.now() + '.xml',
