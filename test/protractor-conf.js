@@ -33,7 +33,7 @@ exports.config = {
        var jasmineReporters = require('jasmine-reporters');
         jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
             consolidateAll: true,
-            filePrefix: 'guitest-xmloutput-'+Date.now(),
+            filePrefix: 'guitest-xmloutput'+Date.now(),
             savePath: 'test/reports'
         }));
   },
