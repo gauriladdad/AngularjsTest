@@ -49,17 +49,17 @@ module.exports = function(config){
     ],
 
      coverageReporter: {
-      // type of file to output, use text to output to console
-      type : 'text',
-      // directory where coverage results are saved
-      dir: 'test/unit-coverage/' ,
-      // if type is text or text-summary, you can set the file name
-       file: 'coverage.txt' 
+		// type of file to output, use text to output to console
+		type : 'text',
+		// directory where coverage results are saved
+		dir: 'test/unit-coverage/' ,
+		// if type is text or text-summary, you can set the file name
+		file: 'coverage.txt' 
     },
 	jenkinsReporter: {
-    outputFile: 'test/reports/test-client-report_' + Date.now() + '.xml',
-    suite: 'warehouse-web',
-    classnameSuffix: 'browser-test'
-	},	
+		outputFile: 'test/reports/test-client-report_' + Date.now() + '.xml',
+		suite: 'warehouse-web',
+		classnameSuffix: 'browser-test'
+	}
 })}
 
