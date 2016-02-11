@@ -32,3 +32,9 @@ grunt unit-test = run unit tests
 ==================XML report of protractor
 remember it's configured to generate individual report based on time instead update the same one
 -allows to maintain log of previos runs
+
+====================removed from script
+ "start": "http-server ./ -a localhost -p 9000",
+    "update-webdriver": "webdriver-manager update",
+    "postinstall": "webdriver-manager update",
+    
