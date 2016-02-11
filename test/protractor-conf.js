@@ -26,5 +26,20 @@ exports.config = {
   baseUrl: 'http://localhost:9000/',
  
   // testing framework, jasmine is the default
-  framework: 'jasmine'
+  framework: 'jasmine2',
+  
+   // Options to be passed to Jasmine-node.
+  onPrepare: function() {      
+       var jasmineReporters = require('jasmine-reporters');
+        jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
+            consolidateAll: true,
+            filePrefix: 'guitest-xmloutput'+Date.now(),
+            savePath: 'test/reports'
+        }));
+  },
+
+  jasmineNodeOpts: {
+    showColors: true,
+    defaultTimeoutInterval: 30000
+  }
 };

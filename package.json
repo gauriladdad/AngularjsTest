@@ -12,6 +12,7 @@
     "grunt-protractor-runner": "^3.0.0",
     "grunt-run": "^0.5.2",
     "jasmine-core": "^2.4.1",
+    "jasmine-reporters": "^2.0.0",
     "karma": "^0.13.19",
     "karma-chrome-launcher": "^0.2.2",
     "karma-coverage": "^0.5.3",
@@ -25,6 +26,7 @@
     "todomvc-common": "^1.0.1"
   },
   "scripts": {
+    "start": "http-server ./ -a localhost -p 9000",
     "unit": "grunt karma",
     "update-webdriver": "webdriver-manager update",
     "postinstall": "webdriver-manager update",

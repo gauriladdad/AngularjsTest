@@ -28,3 +28,7 @@ protractor test/protractor-conf.js
 grunt test = run unit tests and automation tests
 grunt endToend-test = run automation tests 
 grunt unit-test = run unit tests
+
+==================XML report of protractor
+remember it's configured to generate individual report based on time instead update the same one
+-allows to maintain log of previos runs
