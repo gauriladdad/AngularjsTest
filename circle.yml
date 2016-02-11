@@ -1,3 +1,4 @@
-general:
-  artifacts:
-    - "test/reports" # relative to the build directory
+test:
+  override:
+    - mkdir -p $CIRCLE_TEST_REPORTS
+    - bundle exec cucumber --format xml --out $CIRCLE_TEST_REPORTS/cucumber/tests.cucumber
