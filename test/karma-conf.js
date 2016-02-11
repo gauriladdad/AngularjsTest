@@ -20,7 +20,7 @@ module.exports = function(config){
       ],
 
     // karma has its own autoWatch feature but Grunt watch can also do this
-    autoWatch : true,
+    autoWatch : false,
 
     // testing framework, be sure to install the correct karma plugin
     frameworks: ['jasmine'],

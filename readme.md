@@ -24,8 +24,7 @@ Run automation tests  all in separate command prompts
 webdriver-manager start
 protractor test/protractor-conf.js
  
- 
- 
-	//menus.each(function (item) { 
-		  item.click();
-			});
+================Grunt tasks
+grunt test = run unit tests and automation tests
+grunt endToend-test = run automation tests 
+grunt unit-test = run unit tests

@@ -94,7 +94,7 @@ describe('Controllers ::', function() {
 	
 	describe('editing todos', function() {
 		it('editedTodo object should be set with editTodo is invoked', function() {
-			var todo = { title: "test", completed: false };
+			var todo = { title: "tests2", completed: false };
 			todoCtrl.editTodo(todo);
 			expect(todoCtrl.editedTodo).toBe(todo);
 		});
