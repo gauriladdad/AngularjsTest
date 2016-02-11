@@ -26,7 +26,7 @@ module.exports = function(config){
     frameworks: ['jasmine'],
 
     // browsers to test against, be sure to install the correct browser launcher plugins
-    browsers : ['Chrome', 'PhantomJS'],
+    browsers : ['Chrome'],
 
     // map of preprocessors that is used mostly for plugins
     preprocessors: {
@@ -43,8 +43,6 @@ module.exports = function(config){
       'karma-coverage',
       'karma-chrome-launcher',
       'karma-jasmine',
-	   "karma-junit-reporter",
-      'karma-phantomjs-launcher',
 	  'karma-jenkins-reporter'
     ],
 
@@ -57,7 +55,7 @@ module.exports = function(config){
 		file: 'coverage.txt' 
     },
 	jenkinsReporter: {
-		outputFile: '$CIRCLE_TEST_REPORTS/test-client-report-' + Date.now() + '.xml',
+		outputFile: 'test/reports/test-client-report-' + Date.now() + '.xml',
 		suite: 'warehouse-web',
 		classnameSuffix: 'browser-test'
 	}
