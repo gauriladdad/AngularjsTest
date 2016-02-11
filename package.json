@@ -18,12 +18,9 @@
     "karma": "^0.13.19",
     "karma-chrome-launcher": "^0.2.2",
     "karma-coverage": "^0.5.3",
-    "karma-ie-launcher": "^0.2.0",
     "karma-jasmine": "^0.3.7",
     "karma-jenkins-reporter": "0.0.2",
     "load-grunt-tasks": "^3.4.0",
-    "phantomjs": "~1.9",
-    "phantomjs-prebuilt": "^2.1.4",
     "protractor": "^3.1.1",
     "todomvc-app-css": "^1.0.1",
     "todomvc-common": "^1.0.1"
