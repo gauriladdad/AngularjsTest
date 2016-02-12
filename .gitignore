@@ -5,3 +5,4 @@ blog
 test-results
 test/reports/
 test/unit-coverage/
+coverage/
