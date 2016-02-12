@@ -1,55 +1,12 @@
-This is testing of the app - https://github.com/tastejs/todomvc/tree/gh-pages/examples/angularjs-perf
+This project takes the source of TODO MVC Angular project from https://github.com/tastejs/todomvc/tree/gh-pages/examples/angularjs-perf
+and tries to add automation tests to it.
 
+###Tools Used
 
-selenium and protractor - installed globally
-
-Grunt task has been set to run in following way ->
-grunt karma - Karma Server with Auto Runs on File Change
-for more way refer to - https://github.com/karma-runner/grunt-karma
-
-Jasmine for writing unit tests
-Karma for running the tests
-Run unit tests - karma start test/karma-conf.js –single-run
-autowatch in karma-conf needs to be true for tests to execute with above command. It will execute the unit tests again 
-whenever the JavaScript files or unit test specs change. (similarly configured with grunt)
-
-Grunt is a task runner that simplifies the automation of repetitive tasks. 
-
-Protractor is an end-to-end test framework for AngularJS applications built on top of WebDriverJS. Protractor runs tests against your application running in a real browser, interacting with it as a user would.
-Selenium standalone webdriver- This is what will automate the browser to run your tests.
-set up a simple web server using the http-server Node package.
-
-Run automation tests  all in separate command prompts
- npm start
-webdriver-manager start
-protractor test/protractor-conf.js
- 
-================Grunt tasks
-grunt test = run unit tests and automation tests
-grunt endToend-test = run automation tests 
-grunt unit-test = run unit tests
-
-==================XML report of protractor
-remember it's configured to generate individual report based on time instead update the same one
--allows to maintain log of previos runs
-
-====================removed from script
- "start": "http-server ./ -a localhost -p 9000",
-    "update-webdriver": "webdriver-manager update",
-    "postinstall": "webdriver-manager update",
-	
-==========XML reporter for Karma
-karma-jenkins-reporter is being used - note it's addition in karma-config.js under plugins, reporter etc.
-===========under publish junit test reports
-test/reports/*.xml
-
-=====grunt.cmd path - C:\Users\Gauri\AppData\Roaming\npm  
-
-=====tests ran with push - remove plugins with conflict grunt-karma requirement
-Jenkins configuration
-npm install -- one windows command to execute
-npm test -- as one windows command to execute
-package.json doesn't have karma-junit and karma-ie-launcher
-
-=====protractor tests ran with - enable protractor tests to run 
-configuration same as above
+1. Github
+3. Node.js and NPM
+4. Karma along with Jasmine
+4. Protractor
+5. Grunt
+6. Jenkins
+7. selenium
