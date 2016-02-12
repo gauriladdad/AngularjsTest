@@ -59,24 +59,64 @@ module.exports = function(grunt) {
 	    }
 	  },
 
-	  connect: {
+	connect: {
     	options: {
-        port: 9000,
-        hostname: 'localhost'
-      },
-      livereload: {
-        options: {
-        	livereload: 35729,
-          open: true,
-          base: ['']
-          
+			port: 9000,
+			hostname: 'localhost'
+		},
+		livereload: {
+			options: {
+				livereload: 35729,
+				open: true,
+				base: ['']
+			}
+		},
+		test: {
+			options: {
+				base: ['']
+			}
+		},
+		runtime: {
+            options: {
+                middleware: function (connect) {
+                    return [
+                        lrSnippet,
+                        mountFolder(connect, 'instrumented'),
+                        mountFolder(connect, '.......')
+                    ];
+                }
+            }
         }
-      },
-      test: {
-      	options: {
-      		base: ['']
-      	}
-      }
+    },
+	instrument: {
+        files: ['js/*.js', 'js/**/*.js'],
+        options: {
+			lazy: true,
+            basePath: "instrumented"
+        }
+    },
+	protractor_coverage: {
+        options: {
+            keepAlive: true,
+            noColor: false,
+            coverageDir: 'test/coverage',
+            args: {
+                baseUrl: 'http://localhost:9000'
+            }
+        },
+        local: {
+            options: {
+                configFile: 'test/protractor-conf.js'
+            }
+        }
+    },
+	makeReport: {
+        src: 'test/coverage/*.json',
+        options: {
+            type: 'lcov',
+            dir: 'test/coverage',
+            print: 'detail'
+        }
     }
   });
 
